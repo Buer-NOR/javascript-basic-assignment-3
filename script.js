@@ -140,12 +140,14 @@ diceRoller(5, 20) skal returnere et array med 5 tilfeldige tall fra 1-20.
 // Skriv koden for oppgave 2 her
 
 function diceRoll(numDies, maxNum) {
+  let randomNumArray = [];
   for (let i = 0; i < numDies; i++) {
-    console.log(Math.floor(Math.random() * maxNum) + 1);
+    randomNumArray.push(Math.floor(Math.random() * maxNum) + 1);
   }
+  return randomNumArray;
 }
 
-diceRoll(4, 20);
+console.log(diceRoll(4, 20));
 
 /******************************************************************************
 3.
