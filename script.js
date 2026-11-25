@@ -90,7 +90,32 @@ let combinedAge = 0;
 
 // Skriv koden for oppgave 1 her
 
-let averageAge = 0;
+let ottoCount = 0;
+
+for (let i = 0; i < people.length; i++) {
+  const person = people[i];
+
+  if (person.name === "Otto") {
+    ottoCount++;
+    continue;
+  }
+
+  person.city = cities[Math.floor(Math.random() * cities.length)];
+
+  person.title = person.male ? "Mr." : "Ms.";
+
+  person.age += 2;
+
+  person.hobbies.unshift("coding");
+
+  combinedAge += person.age;
+}
+
+console.log(people);
+
+const averageAge = combinedAge / (people.length - ottoCount);
+
+console.log(averageAge);
 
 /******************************************************************************
 2.
@@ -113,6 +138,14 @@ diceRoller(5, 20) skal returnere et array med 5 tilfeldige tall fra 1-20.
 ******************************************************************************/
 
 // Skriv koden for oppgave 2 her
+
+function diceRoll(numDies, maxNum) {
+  for (let i = 0; i < numDies; i++) {
+    console.log(Math.floor(Math.random() * maxNum) + 1);
+  }
+}
+
+diceRoll(4, 20);
 
 /******************************************************************************
 3.
@@ -141,6 +174,25 @@ skal returnere:
 
 // Skriv koden for oppgave 3 her
 
+function stringCleaner(wordArray) {
+  const cleanedArray = [];
+  for (const word of wordArray) {
+    cleanedArray.push(word.trim().toLowerCase());
+  }
+  return cleanedArray.join(" ");
+}
+
+console.log(
+  stringCleaner([
+    " thIS",
+    "teXt  ",
+    " nEeds ",
+    "to",
+    "BE",
+    "cleANED   ",
+    " Up",
+  ]),
+);
 /******************************************************************************
 4.
 
@@ -168,7 +220,21 @@ skal returnere "whao is ohe ptino tf ohis?"
 
 function doubleSwap(string, charA, charB) {
   // Skriv koden for oppgave 4 her
+  const newString = [];
+  for (let i = 0; i < string.length; i++) {
+    if (string[i].toLowerCase() === charA.toLowerCase()) {
+      newString.push(charB);
+    } else if (string[i].toLowerCase() === charB.toLowerCase()) {
+      newString.push(charA);
+    } else {
+      newString.push(string[i]);
+    }
+  }
+
+  return newString.join("");
 }
+
+console.log(doubleSwap("deTte er tExt", "E", "t"));
 
 /******************************************************************************
 5.
@@ -213,3 +279,31 @@ const greetings = [
 ];
 
 // Skriv koden for oppgave 5 her
+
+const helloWords = {
+  hello: "engelsk",
+  ciao: "italiensk",
+  salut: "fransk",
+  hallo: "tysk",
+  hola: "spansk",
+  czesc: "polsk",
+  cześć: "polsk",
+};
+
+function helloChecker(text) {
+  const cleanText = text
+    .toLowerCase()
+    .replace(/[^\p{L}\s]/gu, "")
+    .split(" ");
+
+  for (const word of cleanText) {
+    if (helloWords[word]) {
+      return `HELLO oppdaget på ${helloWords[word]}.`;
+    }
+  }
+  return "Ingen HELLO oppdaget.";
+}
+
+for (const greeting of greetings) {
+  console.log(helloChecker(greeting));
+}
